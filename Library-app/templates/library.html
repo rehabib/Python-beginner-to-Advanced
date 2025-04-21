@@ -1,0 +1,26 @@
+<!-- templates/library.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Search Results</title>
+</head>
+<body>
+    <h2>Search Results</h2>
+    {% for book in books %}
+        <div>
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>Available Copies: {{ book.available_copies }}</p>
+            <form action="{{ url_for('borrow_book', book_id=book.id) }}" method="POST">
+                <input type="text" name="user_name" placeholder="Your name" required>
+                <button type="submit">Borrow</button>
+            </form>
+            <form action="{{ url_for('return_book', book_id=book.id) }}" method="POST">
+                <input type="text" name="user_name" placeholder="Your name" required>
+                <button type="submit">Return</button>
+            </form>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
